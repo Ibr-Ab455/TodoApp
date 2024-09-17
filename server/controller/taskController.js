@@ -15,8 +15,17 @@ export const createTask = async(req, res) => {
  }
 }
 
+export const getAllTask = async (req, res) => {
+   try{
+      const tasks = await Task.find();
+      res.status(200).json(tasks)
+   }catch (error) {
+    res.status(500).json({ msg: error.message});
+   }
+}
 
-// get all task
+
+// get single task
 export const getTasks = async(req, res) => {
     try{
        const { id } = req.params;
