@@ -59,12 +59,12 @@ export const deletTask = async(req, res) => {
 
 export const updateTask = async (req, res) => {
   try{
-    const { id } = req.body;
+    const { id } = req.params
     const task = await Task.findByIdAndUpdate(
         {_id: id}, req.body, {new: true}
     )
 
-    res.status(200).send("Delet task")
+    res.status(200).json(task)
  }catch (error) {
     res.status(500).json({ msg: error.message});
   }
