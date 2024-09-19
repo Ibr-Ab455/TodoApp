@@ -3,6 +3,7 @@ import dotenv from 'dotenv'
 import connectDB from './config/mongoDB.js';
 import taskRoutes from './routes/taskRoutes.js'
 import cors from 'cors'
+import path from 'path'
 
 dotenv.config();
 connectDB();
@@ -13,6 +14,12 @@ app.use(cors());
 
 // routes
 app.use("/api/task", taskRoutes);
+
+app.use(express.static(path.join(_dirname, '/client/dist')));
+
+app.use('*', (req, res) => {
+ res.sendFile(path.join(_dirname, 'client', 'dist', 'index.html'));
+});
 
 const PORT = process.env.PORT || 5000;
 

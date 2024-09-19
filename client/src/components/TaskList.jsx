@@ -53,6 +53,7 @@ export default function TaskList() {
       await axios.post("/api/task/create", formData);
       toast.success("Task added successfully")
       setFormData({ ...formData, name: ""});
+      getTask();
      }catch (err){
      toast.error(err.message)
      console.log(err)
@@ -122,7 +123,7 @@ export default function TaskList() {
 
   return (
     <div className=''>
-      <h2>Task Manager</h2>
+      <h2 className='text-xl font-semibold mb-2'>Task Manager</h2>
       <TaskForm name={name} handleInputChange={handleInputChange} createTask={createTask} isEdeting={isEdeting} updateTasks={updateTasks}/>
       
         {tasks.length > 0 && (
